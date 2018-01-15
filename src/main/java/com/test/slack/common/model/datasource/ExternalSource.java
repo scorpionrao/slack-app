@@ -1,6 +1,6 @@
 package com.test.slack.common.model.datasource;
 
-import com.test.slack.engineers.model.Engineer;
+import com.test.slack.model.Engineer;
 
 import java.util.Set;
 

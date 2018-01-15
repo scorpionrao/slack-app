@@ -1,4 +1,4 @@
-package com.test.slack.engineers.model;
+package com.test.slack.model;
 
 public class Engineer {
 

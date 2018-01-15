@@ -1,7 +1,7 @@
-package com.test.slack.engineers.controller;
+package com.test.slack.controller;
 
-import com.test.slack.engineers.model.Engineers;
-import com.test.slack.engineers.service.EngineerService;
+import com.test.slack.model.Engineers;
+import com.test.slack.service.EngineerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.test.slack.engineers.controller.EngineerController.ENDPOINT;
+import static com.test.slack.controller.EngineerController.ENDPOINT;
 
 @RestController
 @RequestMapping(value = {ENDPOINT}, produces = {MediaType.APPLICATION_JSON_VALUE})

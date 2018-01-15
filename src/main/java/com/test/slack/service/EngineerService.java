@@ -1,7 +1,7 @@
-package com.test.slack.engineers.service;
+package com.test.slack.service;
 
-import com.test.slack.engineers.dao.EngineerDao;
-import com.test.slack.engineers.model.Engineer;
+import com.test.slack.dao.EngineerDao;
+import com.test.slack.model.Engineer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

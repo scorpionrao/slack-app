@@ -1,7 +1,7 @@
-package com.test.slack.engineers.dao;
+package com.test.slack.dao;
 
 import com.test.slack.common.model.datasource.ExternalSource;
-import com.test.slack.engineers.model.Engineer;
+import com.test.slack.model.Engineer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

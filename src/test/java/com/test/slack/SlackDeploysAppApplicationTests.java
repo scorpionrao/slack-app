@@ -6,8 +6,8 @@ import com.jayway.restassured.response.Response;
 import com.jayway.restassured.response.ResponseBody;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.jayway.restassured.specification.ResponseSpecification;
-import com.test.slack.engineers.model.Engineer;
-import com.test.slack.engineers.model.Engineers;
+import com.test.slack.model.Engineer;
+import com.test.slack.model.Engineers;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
