@@ -6,8 +6,6 @@ import com.test.slack.model.Engineers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.CompletableFuture;
-
 @Component
 public class EngineerDao {
 
@@ -19,7 +17,6 @@ public class EngineerDao {
     }
 
     public Engineers getAllEngineers() throws Exception {
-        CompletableFuture<Engineers> future = externalSource.getAllEngineers();
-        return future.get();
+        return externalSource.getAllEngineers();
     }
 }

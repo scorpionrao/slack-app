@@ -11,6 +11,8 @@ import com.test.slack.model.Engineers;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -27,10 +29,12 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SlackDeploysAppApplicationTests {
 
+	private Logger logger = LoggerFactory.getLogger(SlackDeploysAppApplicationTests.class);
+
 	private static final String ENDPOINT_ENGINEERS = "/engineers";
 
 	@LocalServerPort
-	protected int port;
+	public int port;
 
 	private RequestSpecification requestSpec() {
 		RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
@@ -40,26 +44,38 @@ public class SlackDeploysAppApplicationTests {
 
 	}
 
-	protected ResponseSpecification respOk() {
-		ResponseSpecification respOK = new ResponseSpecBuilder()
+	private ResponseSpecification respOk() {
+		return new ResponseSpecBuilder()
 				.expectStatusCode(200)
 				.expectContentType(MediaType.APPLICATION_JSON_VALUE)
 				.build();
-		return respOK;
 	}
 
 
 	@Test
 	public void testGetAllEngineers() {
+		validateAllEngineers();
+	}
 
-        Response response =
-				given(requestSpec())
-				.when()
-					.get(ENDPOINT_ENGINEERS)
-				.then()
-					.log().body()
-					.spec(respOk())
-				.extract().response();
+	@Test
+	public void testConcurrentGetAllEngineers() {
+		long start = System.currentTimeMillis();
+		for (int i = 0; i < 10; i++) {
+			validateAllEngineers();
+		}
+		long elapsedTime = System.currentTimeMillis() - start;
+		logger.info("Elapsed time: " + elapsedTime);
+	}
+
+
+	private void validateAllEngineers() {
+		Response response =
+                given(requestSpec())
+                .when()
+                    .get(ENDPOINT_ENGINEERS)
+                .then()
+                    .spec(respOk())
+                .extract().response();
 
 		ResponseBody responseBody = response.getBody();
 
@@ -71,9 +87,4 @@ public class SlackDeploysAppApplicationTests {
 
 		assertTrue(engineerSet.contains(new Engineer("brady")));
 	}
-
-
-
-
-
 }

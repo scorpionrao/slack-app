@@ -3,8 +3,10 @@ package com.test.slack.common.model.datasource;
 import com.test.slack.model.Engineer;
 import com.test.slack.model.Engineers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,20 +15,22 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-@Repository
-public class SQLiteSource extends SQLLiteSourceBase implements ExternalSource {
+@Component
+public class SQLiteSource extends SQLLiteSourceBase {
+
+    private static final Logger logger = LoggerFactory.getLogger(SQLiteSource.class);
 
     public static final String QUERY_ALL_ENGINEERS = "SELECT distinct(engineer) FROM deploys";
 
     /**
      * select all engineers in the deploys table
      */
-    @Async
     public CompletableFuture<Engineers> getAllEngineers() throws Exception {
 
         Connection conn = null;
         try {
             conn = connect();
+            logger.info(Thread.currentThread().getName());
             Statement stmt = conn.createStatement();
             ResultSet resultSet = stmt.executeQuery(QUERY_ALL_ENGINEERS);
             Set<Engineer> engineerSet = new HashSet<>();
@@ -41,10 +45,5 @@ public class SQLiteSource extends SQLLiteSourceBase implements ExternalSource {
                 conn.close();
             }
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        SQLiteSource app = new SQLiteSource();
-        System.out.println(app.getAllEngineers().get().getEngineers());
     }
 }

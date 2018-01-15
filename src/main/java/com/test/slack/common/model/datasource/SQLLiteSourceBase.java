@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 @Component
-public abstract class SQLLiteSourceBase {
+public class SQLLiteSourceBase {
 
     protected Connection connect() throws SQLException {
         String url = "jdbc:sqlite:deploys.sqlite";
