@@ -25,6 +25,7 @@ public class SQLiteSource extends SQLLiteSourceBase {
     /**
      * select all engineers in the deploys table
      */
+    @Async
     public CompletableFuture<Engineers> getAllEngineers() throws Exception {
 
         Connection conn = null;

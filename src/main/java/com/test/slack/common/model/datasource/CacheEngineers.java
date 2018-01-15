@@ -23,14 +23,14 @@ public class CacheEngineers implements ExternalSource {
 
     @Async
     private void loadEngineersFromDB() throws Exception {
-        CompletableFuture<Engineers> future = this.sqLiteSource.getAllEngineers();
+        CompletableFuture<Engineers> future = sqLiteSource.getAllEngineers();
         engineers = future.get();
     }
 
     @Override
     public Engineers getAllEngineers() throws Exception {
-        // load from DB every 10 seconds
-        if(System.currentTimeMillis() >= lastRetrieved + 10000) {
+        // load from DB every 5 seconds
+        if(System.currentTimeMillis() >= lastRetrieved + 5000) {
             loadEngineersFromDB();
             lastRetrieved = System.currentTimeMillis();
         }

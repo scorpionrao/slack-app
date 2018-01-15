@@ -60,7 +60,8 @@ public class SlackDeploysAppApplicationTests {
 	@Test
 	public void testConcurrentGetAllEngineers() {
 		long start = System.currentTimeMillis();
-		for (int i = 0; i < 10; i++) {
+		// can be changed as required
+		for (int i = 0; i < 2; i++) {
 			validateAllEngineers();
 		}
 		long elapsedTime = System.currentTimeMillis() - start;

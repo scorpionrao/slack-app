@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -39,7 +40,8 @@ public class EngineerControllerTest {
         Set<Engineer> requestEngineerSet = new HashSet();
         requestEngineerSet.add(engineer);
         when(engineerService.getAllEngineers()).thenReturn(new Engineers(requestEngineerSet));
-        ResponseEntity<Engineers> responseEntity = controller.getEngineers();
+        CompletableFuture<ResponseEntity<Engineers>> future = controller.getEngineers();
+        ResponseEntity<Engineers> responseEntity = future.get();
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         Engineers engineers = responseEntity.getBody();
