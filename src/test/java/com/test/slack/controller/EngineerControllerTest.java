@@ -32,13 +32,13 @@ public class EngineerControllerTest {
     }
 
     @Test
-    public void testGetAllEngineers() {
+    public void testGetAllEngineers() throws Exception {
 
         String name = "foo";
         Engineer engineer = new Engineer(name);
         Set<Engineer> requestEngineerSet = new HashSet();
         requestEngineerSet.add(engineer);
-        when(engineerService.getAllEngineers()).thenReturn(requestEngineerSet);
+        when(engineerService.getAllEngineers()).thenReturn(new Engineers(requestEngineerSet));
         ResponseEntity<Engineers> responseEntity = controller.getEngineers();
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -53,7 +53,7 @@ public class EngineerControllerTest {
     }
 
     @Test
-    public void testGetAllEngineersServerError() {
+    public void testGetAllEngineersServerError() throws Exception {
 
         String errorMessage = "Error retrieving";
         when(engineerService.getAllEngineers()).thenThrow(new RuntimeException(errorMessage));

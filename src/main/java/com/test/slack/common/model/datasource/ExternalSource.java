@@ -1,10 +1,10 @@
 package com.test.slack.common.model.datasource;
 
-import com.test.slack.model.Engineer;
+import com.test.slack.model.Engineers;
 
-import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 public interface ExternalSource {
 
-    Set<Engineer> getAllEngineers();
+    CompletableFuture<Engineers> getAllEngineers() throws Exception;
 }

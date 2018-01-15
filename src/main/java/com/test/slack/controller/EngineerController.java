@@ -26,9 +26,9 @@ public class EngineerController {
     }
 
     @GetMapping
-    public ResponseEntity<Engineers> getEngineers() {
+    public ResponseEntity<Engineers> getEngineers() throws Exception {
 
-        Engineers engineers = new Engineers(engineerService.getAllEngineers());
+        Engineers engineers = engineerService.getAllEngineers();
 
         return ResponseEntity.ok()
                 .header("Content-Type", MediaType.APPLICATION_JSON_VALUE)

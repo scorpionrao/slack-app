@@ -35,4 +35,9 @@ public class Engineer {
     public int hashCode() {
         return this.getName().hashCode();
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }
